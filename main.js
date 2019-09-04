@@ -41,6 +41,38 @@ function saveIssue(e) {
   e.preventDefault();
 }
 
+// Set the Closed Status on a Issue Ticket via the id of the current item;
+function setStatusClosed(id) {
+  var issues = JSON.parse(localStorage.getItem('issues'));
+
+  for (var i = 0; i < issues.length; i++) {
+    if (issues[i].id == id) {
+      issues[i].status = 'Closed';
+    }
+  }
+
+  localStorage.setItem('issues', JSON.stringify(issues));
+
+  fetchIssues();
+}
+
+
+// Delete a Issue Ticket via its id from the current list of Tickets;
+function deleteIssue(id) {
+  var issues = JSON.parse(localStorage.getItem('issues'));
+
+  for (var i = 0; i < issues.length; i++) {
+    if (issues[i].id == id) {
+      issues.splice(i, 1);
+    }
+  }
+
+  localStorage.setItem('issues', JSON.stringify(issues));
+
+  fetchIssues();
+}
+
+
 // Fetching Issue Data From Local Storage;
 function fetchIssues() {
   // GET Issues Data from Local Storage and Parse it from a string to a JSON file;
